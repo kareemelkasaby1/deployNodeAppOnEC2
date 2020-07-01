@@ -1,0 +1,46 @@
+
+version: '3'
+services:
+  mongo:
+    image: 'mongo:latest'
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+  # nginx:
+  #   restart: always
+  #   build:
+  #     context: ./nginx
+  #     dockerfile: Dockerfile.dev
+  #   ports:
+  #     - '3306:80'
+  server:
+    build:
+      context: ./badreads-backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - ./badreads-backend:/app
+    restart: always
+    env_file:
+      - ./badreads-backend/.env
+    expose:
+      - 4000
+    ports: 
+      - 4000:4000
+    depends_on: 
+      - mongo
+  react:
+    build:
+      context: ./badreads-frontend
+      dockerfile: Dockerfile.dev
+    depends_on: 
+      - server
+    volumes:
+      - /app/node_modules
+      - ./badreads-frontend:/app
+    ports: 
+      - 3000:3000
+    expose:
+      - 3000
+    links:
+      - server
+    stdin_open: true

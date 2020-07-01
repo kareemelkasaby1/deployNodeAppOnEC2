@@ -20,7 +20,7 @@ const utils = require('./helpers/util.js');
 
 
 var app = express();
-mongoose.connect('mongodb://localhost:27017/badReads',{auth: {"authSource": "admin"}, user: "admin", pass: "123456", useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://mongo:27017/badReads',{auth: {"authSource": "admin"}, user: "admin", pass: "123456", useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.set('useCreateIndex', true);
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
