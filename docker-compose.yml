@@ -3,8 +3,13 @@ version: '3'
 services:
   mongo:
     image: 'mongo:latest'
+    environment:
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123456
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    # command: use admin
   # nginx:
   #   restart: always
   #   build:
@@ -31,7 +36,7 @@ services:
   react:
     build:
       context: ./badreads-frontend
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     depends_on: 
       - server
     volumes:

@@ -52,4 +52,19 @@ router.post('/', upload.single('file'), async function(req, resp) {
     }
   });
 
+
+  router.put('/:email', async(req,res)=>{
+    try{
+      const isAdmin = await userModel.update({
+        email: req.params.email,
+      },{
+        isAdmin: req.body.isAdmin
+      },{
+        upsert: true
+      })
+      return res.json(isAdmin)
+    }catch(err){
+      res.send(err)
+    }
+  })
 module.exports = router
