@@ -1,14 +1,13 @@
 version: '3'
 services:
   mongo:
-    image: 'mongo:latest'
+    image: 'mongo:4.2.8'
     environment:
       - MONGO_INITDB_DATABASE=admin
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=123456
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
-    # command: use admin
   nginx:
     restart: always
     build:
@@ -35,16 +34,12 @@ services:
   react:
     build:
       context: ./badreads-frontend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     depends_on: 
       - api
     volumes:
       - /app/node_modules
       - ./badreads-frontend:/app
-    # ports: 
-    #   - 3000:3000
-    # expose:
-    #   - 3000
     links:
       - api
     stdin_open: true

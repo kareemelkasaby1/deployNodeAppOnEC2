@@ -45,13 +45,13 @@ class HomeBookTable extends Component {
                 userId,
                 bookId,
                 action
+            }).then(res => {
             }).catch(function (error) {
                 console.log(error);
             })
             // window.location.reload(false);
-            action = axios.get(`http://localhost:4000/userbook/${userId}/${bookId}`)
-        .then(res => {
-                
+        action = axios.get(`http://localhost:4000/userbook/${userId}/${bookId}`)
+            .then(res => {
                 this.setState({
                     usersBook: res.data
                 })

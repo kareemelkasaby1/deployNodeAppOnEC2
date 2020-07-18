@@ -97,8 +97,9 @@ router.post('/',async(req , res)=>{
       const books = await usersBooksModel.create(req.body)
       return res.json(books)
       
-  } catch (error) {
+    } catch (error) {
       
+      console.log("books",error);
       res.send(error)
   }
   })
