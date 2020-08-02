@@ -10,7 +10,7 @@ services:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
   nginx:
     restart: always
-    image: kareemelkasaby/nodeNginx:latest
+    image: kareemelkasaby/nodenginx:latest
     ports:
       - '3000:80'
   api:

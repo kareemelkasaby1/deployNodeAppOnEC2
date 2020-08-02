@@ -29,14 +29,14 @@ pipeline {
                 /* groovylint-disable-next-line LineLength */
                 sh 'SHA=$(cat /tmp/gitrev);docker build -t kareemelkasaby/badreads-frontend:$SHA -t kareemelkasaby/badreads-frontend:latest -f ./badreads-frontend/Dockerfile.prod ./badreads-frontend'
                 /* groovylint-disable-next-line LineLength */
-                sh 'SHA=$(cat /tmp/gitrev);docker build -t kareemelkasaby/nodeNginx:$SHA -t kareemelkasaby/nodeNginx:latest -f ./nginx/Dockerfile.prod ./nginx'
+                sh 'SHA=$(cat /tmp/gitrev);docker build -t kareemelkasaby/nodenginx:$SHA -t kareemelkasaby/nodenginx:latest -f ./nginx/Dockerfile.prod ./nginx'
                 sh "docker login -u '$DOCKERHUB_USER' -p '$DOCKERHUB_PASS'"
                 sh 'SHA=$(cat /tmp/gitrev);docker push kareemelkasaby/badreads-backend:$SHA'
                 sh 'docker push kareemelkasaby/badreads-backend:latest'
                 sh 'SHA=$(cat /tmp/gitrev);docker push kareemelkasaby/badreads-frontend:$SHA'
                 sh 'docker push kareemelkasaby/badreads-frontend:latest'
-                sh 'SHA=$(cat /tmp/gitrev);docker push kareemelkasaby/nodeNginx:$SHA'
-                sh 'docker push kareemelkasaby/nodeNginx:latest'
+                sh 'SHA=$(cat /tmp/gitrev);docker push kareemelkasaby/nodenginx:$SHA'
+                sh 'docker push kareemelkasaby/nodenginx:latest'
             }
         }
         stage('integrationTestAfterPush') {
