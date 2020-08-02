@@ -102,4 +102,6 @@ dist
 .tern-port
 
 
-public/*
+public/authors/*
+public/books/*
+public/users/*
