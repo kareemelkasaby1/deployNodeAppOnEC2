@@ -59,6 +59,8 @@ pipeline {
                 /* groovylint-disable-next-line LineLength */
                 sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./badreads-backend/package.json ec2-user@$PRODEC2IP:~/app/badreads-backend"
                 /* groovylint-disable-next-line LineLength */
+                sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./badreads-backend/index.js ec2-user@$PRODEC2IP:~/app/badreads-backend"
+                /* groovylint-disable-next-line LineLength */
                 sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./badreads-frontend/package.json ec2-user@$PRODEC2IP:~/app/badreads-frontend"
                 sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./init-mongo.js ec2-user@$PRODEC2IP:~/app"
                 /* groovylint-disable-next-line LineLength */
