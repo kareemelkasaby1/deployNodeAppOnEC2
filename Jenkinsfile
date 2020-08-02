@@ -55,7 +55,7 @@ pipeline {
                 /* groovylint-disable-next-line LineLength */
                 sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./docker-compose.yml ec2-user@$PRODEC2IP:~/app"
                 /* groovylint-disable-next-line LineLength */
-                sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./badreads-backend/.env ec2-user@$PRODEC2IP:~/app"
+                sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./badreads-backend/.env ec2-user@$PRODEC2IP:~/app/badreads-backend"
                 sh "sudo scp -o StrictHostKeyChecking=no -i $DEPLOYKEY -p ./init-mongo.js ec2-user@$PRODEC2IP:~/app"
                 /* groovylint-disable-next-line LineLength */
                 sh "sudo ssh -o StrictHostKeyChecking=no -i $DEPLOYKEY ec2-user@$PRODEC2IP 'cd ~/app;sudo docker-compose up --build -d;exit'"
