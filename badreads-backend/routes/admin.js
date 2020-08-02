@@ -15,7 +15,29 @@ var storage = multer.diskStorage({
     cb(null, file.originalname)
   }
 })
-var upload = multer({ storage: storage ,
+var authorImgUpload = multer({ storage: storage ,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg"|| file.mimetype == "image/gif") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return resp.status(401).json({
+                error: true,
+                message: "image must be .png .jpg or .jpeg!"
+            });
+        }
+    }
+});
+
+var bookStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+    cb(null, 'public/books/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
+var bookImgUpload = multer({ storage: bookStorage ,
     fileFilter: (req, file, cb) => {
         if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg"|| file.mimetype == "image/gif") {
             cb(null, true);
@@ -47,7 +69,7 @@ router.get('/author',async(req,res)=>{
     
 
  
- router.post('/author',upload.single('img'),async(req,res)=>{
+ router.post('/author',authorImgUpload.single('img'),async(req,res)=>{
      const url = req.protocol + '://' + req.get('host') + '/authors/' + req.file.originalname 
      const {authorName,authorInfo,date_of_birth} = req.body;
     const authorInstance = new authModel({
@@ -68,7 +90,7 @@ catch(err)
 
    })
     
-router.patch('/author/:id',upload.single('img'),async(req,res)=>{
+router.patch('/author/:id',authorImgUpload.single('img'),async(req,res)=>{
     try{
     if(req.file){
         req.body.img= req.protocol + '://' + req.get('host') + '/authors/' + req.file.originalname
@@ -117,10 +139,11 @@ router.get('/book',async(req,res)=>{
      
  
  
- router.post('/book',upload.single('img'),async(req,res,next)=>{
+ router.post('/book',bookImgUpload.single('img'),async(req,res,next)=>{
     const {bookName,author,category} = req.body;
     const url = req.protocol + '://' + req.get('host') + '/books/' + req.file.originalname 
     const bookInstance = new bookModel({
+        bookId: Math.floor(Math.random() * 100000),
         bookName:bookName,
         author:author,
         category:category,

@@ -8,6 +8,6 @@ const usesrsBooksSchema = new mongoose.Schema({
     //specify the action twards books like if the user want to read the book -> -1 or curently reading -> 0 or read -> 1
     action: {type: String, default:"Want to Read"},
 });
-
+usesrsBooksSchema.index({userId: 1, bookId: 1}, { unique: true })
 const authModel = mongoose.model('UsesrsBooks', usesrsBooksSchema);
 module.exports = authModel

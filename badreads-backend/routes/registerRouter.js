@@ -40,7 +40,7 @@ router.post('/', upload.single('file'), async function(req, resp) {
                 email: req.body.email,
                 password: req.body.password,
                 img: url+"/users/" + req.file.originalname,
-            });            
+            });
             const userObj = utils.getCleanUser(user);
             return resp.status(200).json({user: userObj, token: utils.generateToken(user) });
         }

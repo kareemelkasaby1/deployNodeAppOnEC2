@@ -10,11 +10,15 @@ services:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
   nginx:
     restart: always
-    image: kareemelkasaby/nodeNginx:latest
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.prod
     ports:
       - '3000:80'
   api:
-    image: kareemelkasaby/badreads-backend:latest
+    build:
+      context: ./badreads-backend
+      dockerfile: Dockerfile.dev
     volumes:
       - /app/node_modules
       - ./badreads-backend:/app
@@ -28,7 +32,9 @@ services:
     depends_on: 
       - mongo
   react:
-    image: kareemelkasaby/badreads-frontend:latest
+    build:
+      context: ./badreads-frontend
+      dockerfile: Dockerfile.dev
     depends_on: 
       - api
     volumes:
