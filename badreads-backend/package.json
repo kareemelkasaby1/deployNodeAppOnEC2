@@ -4,7 +4,7 @@
   "description": "backend for badreads website iti nodejs course project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No Errors\" && exit 1",
+    "test": "echo \"No Errors\"",
     "start": "node index.js"
   },
   "repository": {
