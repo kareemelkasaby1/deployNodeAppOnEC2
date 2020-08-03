@@ -13,7 +13,7 @@ services:
     image: kareemelkasaby/nodenginx:latest
     ports:
       - '3000:80'
-  api:
+  localhost:
     image: kareemelkasaby/badreads-backend:latest
     # volumes:
     #   - /app/node_modules
