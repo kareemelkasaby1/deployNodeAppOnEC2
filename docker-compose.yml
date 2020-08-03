@@ -13,7 +13,7 @@ services:
     image: kareemelkasaby/nodenginx:latest
     ports:
       - '3000:80'
-  localhost:
+  api:
     image: kareemelkasaby/badreads-backend:latest
     # volumes:
     #   - /app/node_modules
@@ -30,11 +30,11 @@ services:
   react:
     image: kareemelkasaby/badreads-frontend:latest
     depends_on: 
-      - localhost
+      - api
     # volumes:
     #   - /app/node_modules
     #   - ./badreads-frontend:/app
     # hello coment
     links:
-      - localhost
+      - api
     stdin_open: true
