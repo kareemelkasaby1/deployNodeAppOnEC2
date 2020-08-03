@@ -10,7 +10,7 @@ pipeline {
                     /* groovylint-disable-next-line LineLength */
                     sh 'docker build -t kareemelkasaby/badreads-backend -f ./badreads-backend/Dockerfile.dev ./badreads-backend'
                     /* groovylint-disable-next-line LineLength */
-                    sh 'docker build -t kareemelkasaby/badreads-frontend -f ./badreads-frontend/Dockerfile.dev ./badreads-backend'
+                    sh 'docker build -t kareemelkasaby/badreads-frontend -f ./badreads-frontend/Dockerfile.dev ./badreads-frontend'
                     sh 'docker run kareemelkasaby/badreads-backend npm run test'
                     sh 'docker run kareemelkasaby/badreads-frontend npm run test'
                 },
