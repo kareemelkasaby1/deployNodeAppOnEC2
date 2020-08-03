@@ -15,9 +15,9 @@ services:
       - '3000:80'
   api:
     image: kareemelkasaby/badreads-backend:latest
-    volumes:
-      - /app/node_modules
-      - ./badreads-backend:/app
+    # volumes:
+    #   - /app/node_modules
+    #   - ./badreads-backend:/app
     restart: always
     env_file:
       - ./badreads-backend/.env
@@ -31,9 +31,9 @@ services:
     image: kareemelkasaby/badreads-frontend:latest
     depends_on: 
       - api
-    volumes:
-      - /app/node_modules
-      - ./badreads-frontend:/app
+    # volumes:
+    #   - /app/node_modules
+    #   - ./badreads-frontend:/app
     links:
       - api
     stdin_open: true
