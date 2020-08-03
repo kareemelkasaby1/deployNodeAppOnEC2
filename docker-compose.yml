@@ -30,11 +30,11 @@ services:
   react:
     image: kareemelkasaby/badreads-frontend:latest
     depends_on: 
-      - api
+      - localhost
     # volumes:
     #   - /app/node_modules
     #   - ./badreads-frontend:/app
     # hello coment
     links:
-      - api
+      - localhost
     stdin_open: true
