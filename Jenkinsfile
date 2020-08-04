@@ -25,7 +25,7 @@ pipeline {
             steps {
                 sh 'git rev-parse HEAD > /tmp/gitrev'
                 /* groovylint-disable-next-line LineLength */
-                sh 'SHA=$(cat /tmp/gitrev);docker build -t --no-cache kareemelkasaby/badreads-backend:$SHA -t kareemelkasaby/badreads-backend:latest -f ./badreads-backend/Dockerfile.prod ./badreads-backend'
+                sh 'SHA=$(cat /tmp/gitrev);docker build --no-cache -t kareemelkasaby/badreads-backend:$SHA -t kareemelkasaby/badreads-backend:latest -f ./badreads-backend/Dockerfile.prod ./badreads-backend'
                 /* groovylint-disable-next-line LineLength */
                 sh 'SHA=$(cat /tmp/gitrev);docker build -t kareemelkasaby/badreads-frontend:$SHA -t kareemelkasaby/badreads-frontend:latest -f ./badreads-frontend/Dockerfile.prod ./badreads-frontend'
                 /* groovylint-disable-next-line LineLength */
