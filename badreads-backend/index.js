@@ -68,6 +68,6 @@ app.use('/',homeRouter);
 
 
 app.listen(4000, "0.0.0.0", function () {
-    console.log('listening on port 4000!');
+    console.log('listening on port 4000! version1 with ip');
 });
 //build b2a y ebn el maraaaaaaaaaaaaaaaaaa -_- 
