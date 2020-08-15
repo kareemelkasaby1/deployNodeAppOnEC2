@@ -39,11 +39,11 @@ pipeline {
                 sh 'docker push kareemelkasaby/nodenginx:latest'
             }
         }
-        stage('integrationTestAfterPush') {
-            steps {
-                sh 'docker-compose up --build --no-start --force-recreate'
-            }
-        }
+        // stage('integrationTestAfterPush') {
+        //     steps {
+        //         sh 'docker-compose up --build --no-start --force-recreate'
+        //     }
+        // }
         stage('deploy') {
             steps {
                 /* groovylint-disable-next-line LineLength */
