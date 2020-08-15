@@ -3,23 +3,23 @@ pipeline {
     /* groovylint-disable-next-line NoDef, UnusedVariable, VariableName, VariableTypeRequired */
     agent any
     stages {
-        stage('tests') {
-            steps {
-                /* groovylint-disable-next-line SpaceAroundMapEntryColon */
-                parallel 'unit': {
-                    /* groovylint-disable-next-line LineLength */
-                    sh 'docker build -t kareemelkasaby/badreads-backend -f ./badreads-backend/Dockerfile.dev ./badreads-backend'
-                    /* groovylint-disable-next-line LineLength */
-                    sh 'docker build -t kareemelkasaby/badreads-frontend -f ./badreads-frontend/Dockerfile.dev ./badreads-frontend'
-                    sh 'docker run kareemelkasaby/badreads-backend npm run test'
-                    sh 'docker run kareemelkasaby/badreads-frontend npm run test'
-                },
-                /* groovylint-disable-next-line SpaceAroundMapEntryColon */
-                'integration': {
-                    sh 'docker-compose -f ./docker-compose.yml.dev up --build --no-start'
-                }
-            }
-        }
+        // stage('tests') {
+        //     steps {
+        //         /* groovylint-disable-next-line SpaceAroundMapEntryColon */
+        //         parallel 'unit': {
+        //             /* groovylint-disable-next-line LineLength */
+        //             sh 'docker build -t kareemelkasaby/badreads-backend -f ./badreads-backend/Dockerfile.dev ./badreads-backend'
+        //             /* groovylint-disable-next-line LineLength */
+        //             sh 'docker build -t kareemelkasaby/badreads-frontend -f ./badreads-frontend/Dockerfile.dev ./badreads-frontend'
+        //             sh 'docker run kareemelkasaby/badreads-backend npm run test'
+        //             sh 'docker run kareemelkasaby/badreads-frontend npm run test'
+        //         },
+        //         /* groovylint-disable-next-line SpaceAroundMapEntryColon */
+        //         'integration': {
+        //             sh 'docker-compose -f ./docker-compose.yml.dev up --build --no-start'
+        //         }
+        //     }
+        // }
 
         stage('beforeDeploy') {
             steps {
