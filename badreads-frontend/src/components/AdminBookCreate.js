@@ -45,7 +45,7 @@ handleBook = () => {
 
     this.setState({error: "Must choose an image for the book"})
   }else{
-  axios.post('http://localhost:4000/admin/book', aformData,{
+  axios.post(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/book`, aformData,{
     headers: {
       'Content-Type': 'multipart/form-data'
     }

@@ -46,7 +46,7 @@ class Register extends Component {
     formData.append("password",this.state.password)
     formData.append("confirmPassword",this.state.confirmPassword)
     formData.append("file",this.state.file)
-    axios.post('http://localhost:4000/register', formData, {
+    axios.post(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/register`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

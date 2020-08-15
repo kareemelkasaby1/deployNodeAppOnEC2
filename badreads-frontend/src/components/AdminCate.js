@@ -17,7 +17,7 @@ class AdminCate extends Component{
   }
   
   updateView = () => {
-    axios.get("http://localhost:4000/admin/category")
+    axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/category`)
     .then(res=>{
       const data = res.data;
       this.setState({cates:data})
@@ -47,7 +47,7 @@ class AdminCate extends Component{
   }
   
     handledeletecate=(index)=>{
-      axios.delete("http://localhost:4000/admin/category/"+this.state.cates[index]._id)
+      axios.delete(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/category/`+this.state.cates[index]._id)
       .then(res=>{
         this.updateView()
         this.props.history.push("/admin/category")

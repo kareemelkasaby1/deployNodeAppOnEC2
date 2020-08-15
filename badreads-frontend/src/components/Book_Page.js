@@ -17,7 +17,7 @@ export default class Book_Page extends Component {
 
   get_book_data = ()=>{
     // get book data
-    axios.get(`http://127.0.0.1:4000/book/${this.props.match.params.id}`).then(
+    axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/book/${this.props.match.params.id}`).then(
       res => {
         const data = res.data;        
         const { bookName, img, bookDescription, rating, author,  category} = data
@@ -36,7 +36,7 @@ export default class Book_Page extends Component {
 
     if (getUser()){
       // get user rating for this book
-      axios.get(`http://127.0.0.1:4000/rate/${getUser().userId}/${this.props.match.params.id}`)
+      axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/rate/${getUser().userId}/${this.props.match.params.id}`)
       .then(res=>{
         const {rating} = res.data
         this.setState({
@@ -47,7 +47,7 @@ export default class Book_Page extends Component {
       })
   
       // get user state for this book
-      axios.get(`http://127.0.0.1:4000/userBook/${getUser().userId}/${this.props.match.params.id}`)
+      axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/userBook/${getUser().userId}/${this.props.match.params.id}`)
       .then(res=>{
         this.setState({state: res.data})
         
@@ -57,7 +57,7 @@ export default class Book_Page extends Component {
     }
 
     // get revies for this book
-    axios.get(`http://127.0.0.1:4000/review/${this.props.match.params.id}`)
+    axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/review/${this.props.match.params.id}`)
     .then(res=>{
       this.setState({reviewsList: res.data})
     }).catch(err=>{
@@ -68,7 +68,7 @@ export default class Book_Page extends Component {
 
   rate_book = () => {
     if (getUser()){
-      axios.post(`http://127.0.0.1:4000/rate/${getUser().userId}/${this.props.match.params.id}`,{
+      axios.post(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/rate/${getUser().userId}/${this.props.match.params.id}`,{
         rating: this.state.TempRating
       }).then(res => {
         this.get_book_data()
@@ -80,7 +80,7 @@ export default class Book_Page extends Component {
   }
 
   clear_rating_book = () => {
-    axios.delete(`http://127.0.0.1:4000/rate/${getUser().userId}/${this.props.match.params.id}`)
+    axios.delete(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/rate/${getUser().userId}/${this.props.match.params.id}`)
     .then(res=>{
       this.get_book_data()
       this.setState({
@@ -128,7 +128,7 @@ export default class Book_Page extends Component {
 
   deleteReview = reviewId => e => {
     if (getUser()){
-      axios.delete(`http://127.0.0.1:4000/review/${getUser().userId}/${this.props.match.params.id}/${reviewId}`)
+      axios.delete(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/review/${getUser().userId}/${this.props.match.params.id}/${reviewId}`)
       .then(res=>{
         this.get_book_data()
       }).catch(err=>{
@@ -142,7 +142,7 @@ export default class Book_Page extends Component {
   changeState = async(event) => {
     if (getUser()){
       this.setState({state: event.target.value})
-      axios.put(`http://127.0.0.1:4000/userBook/${getUser().userId}/${this.props.match.params.id}`,{action: event.target.value})
+      axios.put(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/userBook/${getUser().userId}/${this.props.match.params.id}`,{action: event.target.value})
       .then(res=>{
       }).catch(err=>{
         console.log(err);
@@ -154,7 +154,7 @@ export default class Book_Page extends Component {
 
   submitReview = () => {
     if (getUser()){
-      axios.post(`http://127.0.0.1:4000/review/${getUser().userId}/${this.props.match.params.id}`,{review: this.state.review})
+      axios.post(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/review/${getUser().userId}/${this.props.match.params.id}`,{review: this.state.review})
       .then(res=>{
         this.setState({review: ""});
         this.get_book_data()
@@ -178,7 +178,7 @@ export default class Book_Page extends Component {
       this.setState({reviewEditing: "",reviewEditNum: -1});
       return
     }
-    axios.put(`http://127.0.0.1:4000/review/${id}`,{review: this.state.reviewEditing})
+    axios.put(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/review/${id}`,{review: this.state.reviewEditing})
       .then(res=>{
         this.setState({reviewEditing: "",reviewEditNum: -1});
         this.get_book_data()        

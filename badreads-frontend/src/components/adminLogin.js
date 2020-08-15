@@ -24,7 +24,7 @@ class AdminLogin extends Component {
     this.props.checkUser();
   }
   handleLogin = () => {
-    axios.post('http://localhost:4000/admin/login', { email: this.state.email, password: this.state.password }).then(response => {
+    axios.post(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/login`, { email: this.state.email, password: this.state.password }).then(response => {
       setUserSession(response.data.token, response.data.user);
       this.checkUser();      
       this.props.history.push('/admin/author');

@@ -15,7 +15,7 @@ export default class Category_books extends Component {
       currentPage
     })
     // get category name  
-    axios.get(`http://127.0.0.1:4000/category/${this.props.match.params.id}/name`)
+    axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/category/${this.props.match.params.id}/name`)
       .then(res=>{
         if (!res.data.categoryName){
           this.props.history.push(`/404`)
@@ -28,7 +28,7 @@ export default class Category_books extends Component {
       })
       
       // get category books
-      axios.get(`http://127.0.0.1:4000/category/${this.props.match.params.id}/${currentPage}`)
+      axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/category/${this.props.match.params.id}/${currentPage}`)
       .then(res=>{
         if (res.data.length==0){
             this.props.history.push(`/404`)
@@ -40,7 +40,7 @@ export default class Category_books extends Component {
         console.log(err);
       })
 
-      axios.get(`http://127.0.0.1:4000/category/${this.props.match.params.id}/count`)
+      axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/category/${this.props.match.params.id}/count`)
       .then(res=>{
         console.log(res.data);
         this.setState({

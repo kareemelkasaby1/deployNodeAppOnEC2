@@ -5,7 +5,7 @@ import './author.css'
 class HomeCategoryTable extends Component {
 
     render() {
-        let bUrl = `http://localhost:3000/category/${this.props.obj._id}`        
+        let bUrl = `http://${process.env.REACT_APP_PRODUCTION_IP}:3000/category/${this.props.obj._id}`        
         return (
             <div key={this.props.id}>
                 <div className="card item-card-cat card-block">

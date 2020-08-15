@@ -13,6 +13,7 @@ services:
     image: kareemelkasaby/nodenginx:latest
     ports:
       - '80:80'
+      - '3000:80'
   api:
     image: kareemelkasaby/badreads-backend:latest
     # volumes:
@@ -31,6 +32,8 @@ services:
     image: kareemelkasaby/badreads-frontend:latest
     depends_on: 
       - api
+    env_file:
+      - ./badreads-frontend/.env
     # volumes:
     #   - /app/node_modules
     #   - ./badreads-frontend:/app

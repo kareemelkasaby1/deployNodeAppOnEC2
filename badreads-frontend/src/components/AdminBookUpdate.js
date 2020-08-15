@@ -44,7 +44,7 @@ class AdminBookUpdate extends Component
         aformData.append("category",this.state.category)
         aformData.append("author",this.state.author)
         if(this.state.img) aformData.append("img",this.state.img)
-        axios.patch('http://localhost:4000/admin/book/'+this.props.location.state.details.bookId, aformData,{
+        axios.patch(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/book/`+this.props.location.state.details.bookId, aformData,{
           headers: {
             'Content-Type': 'multipart/form-data'
           }

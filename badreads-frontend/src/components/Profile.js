@@ -20,7 +20,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:4000/userbook/${getUser().userId}`)
+        axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/userbook/${getUser().userId}`)
             .then(res => {
                 const userBooks = res.data.map((val) => {
                     return val.bookId
@@ -39,7 +39,7 @@ export default class Home extends Component {
         var header = document.querySelector('#lefa')
         header.innerHTML = "All your Books"
         let userId = getUser().userId
-        axios.get(`http://localhost:4000/userbook/${userId}`)
+        axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/userbook/${userId}`)
             .then(res => {
                 const userBooks = res.data.map((val) => {
                     return val.bookId
@@ -75,7 +75,7 @@ export default class Home extends Component {
                 break;
         }
         let userId = getUser().userId
-        axios.get(`http://localhost:4000/userbook/${value}/${userId}`)
+        axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/userbook/${value}/${userId}`)
             .then(res => {
                 const userBooks = res.data.map((val) => {
                     return val.bookId

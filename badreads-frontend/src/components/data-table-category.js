@@ -6,7 +6,7 @@ class DataTable extends Component {
 
     
     render() {
-        // let bUrl = `http://localhost:3000/author/${this.props.obj._id}`
+        // let bUrl = `http://${process.env.REACT_APP_PRODUCTION_IP}:3000/author/${this.props.obj._id}`
         console.log(this.props.obj);
         
         return (

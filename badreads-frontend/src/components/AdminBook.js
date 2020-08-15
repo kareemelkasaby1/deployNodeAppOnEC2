@@ -22,17 +22,17 @@ componentDidMount(){
 }
 
 updateView = () =>{
-  axios.get("http://localhost:4000/admin/book")
+  axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/book`)
      .then(res=>{
        const data = res.data;
        this.setState({books:data})
      })
 }
 onSubmit = async() => {
-  await axios.get("http://localhost:4000/admin/author")
+  await axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/author`)
   .then(response => {
       var authors=response.data
-      axios.get("http://localhost:4000/admin/category")
+      axios.get(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/category`)
       .then(response => {
           var categories=response.data
           this.props.history.push({pathname: '/admin/book/create', state : { authors: authors, categories: categories }})
@@ -60,7 +60,7 @@ authorspath=()=>{
 }
 
   handledeletebook=(index)=>{
-    axios.delete("http://localhost:4000/admin/book/"+this.state.books[index]._id)
+    axios.delete(`http://${process.env.REACT_APP_PRODUCTION_IP}:4000/admin/book/`+this.state.books[index]._id)
     .then(res=>{
       this.updateView()
       this.props.history.push("/admin/book/")
